@@ -2,9 +2,8 @@ package example;
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+
 
 public class ValuePrimitive {
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
@@ -23,15 +22,49 @@ public class ValuePrimitive {
         String invalidUuid = "not-a-uuid";
 
 
+        List<Integer> intList = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7));
 
+        intList.add(12);
+        intList.add(14);
+
+
+        List<Integer> newList = intList.stream().sorted(Integer::compareTo).toList();
+
+
+        System.out.println(newList);
 
 
         UUID uuidV7 = uuidV7();
 
         System.out.println(uuidV7);
         System.out.println(uuidV7.version());
-        System.out.println(uuidV7.variant());
 
+        List<String> listOfStr = new ArrayList<>(List.of("Onat", "Adam", "Cannot"));
+
+
+        Iterator<String> iterator = listOfStr.iterator();
+
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+
+        System.out.println(getFullname("Onat", "Arslan"));
+
+        for (String arg : args) {
+            System.out.println(arg);
+        }
+    }
+
+    static String getFullname(String name, String surname) {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(name);
+        builder.append(" ");
+        builder.append(surname);
+
+        return builder.toString();
     }
 
 
@@ -50,7 +83,7 @@ public class ValuePrimitive {
     }
 
     static UUID safeParseUuid(String raw) {
-        if (raw == null || raw.isBlank()){
+        if (raw == null || raw.isBlank()) {
             throw new IllegalArgumentException("value cannot be null or empty");
         }
 
