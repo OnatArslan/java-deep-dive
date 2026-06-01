@@ -114,8 +114,45 @@ public class VarControl {
 //
 //        System.out.println(hasAccess);
         
+        try {
+            System.out.println(normalizeEmail("Onat@Example.com"));
+            System.out.println(normalizeEmail("OnatExample.com"));
+            System.out.println(normalizeEmail(null));
+        } catch (Exception e) {
+            System.out.println("error on normalize email: " + e);
+        }
+        
+        List<Integer> idList = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13));
+        
+        int[] newArr = new int[idList.size()];
+        
+        for (int i = 0; i < newArr.length; i++) {
+            newArr[i] = idList.get(i);
+        }
+        System.out.println("------");
+        System.out.println(Arrays.toString(newArr));
+        
+        
     }
     
+    
+    public static String normalizeEmail(String email) {
+        boolean isValid = validateEmail(email);
+        if (!isValid) {
+            throw new IllegalArgumentException("invalid email given");
+        }
+        
+        return email.strip().toLowerCase(Locale.ROOT);
+        
+    }
+    
+    public static boolean validateEmail(String email) {
+        if (email == null || !email.contains("@")) {
+            return false;
+        }
+        
+        return true;
+    }
     
     public static List<Integer> customRange(int start, int end) {
         
