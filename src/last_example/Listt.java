@@ -34,5 +34,22 @@ public class Listt {
             System.out.println(num);
         }
 
+        List<Session> sessions = new ArrayList<>();
+        Iterator<Session> sesIt = sessions.iterator();
+
+        while(sesIt.hasNext()){
+            Session session = sesIt.next();
+            if (!session.isActive()){
+                sesIt.remove(); // we use it.remove() because of CMP
+            }
+        }
+        sessions.removeIf(session -> {
+            if (!session.isActive()) {
+                System.out.printf("session removed: %s%n", session.getTitle());
+                return true;   // inactive → sil
+            }
+            return false;      // active → tut
+        });
+
     }
 }
