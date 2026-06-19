@@ -48,8 +48,20 @@ public class Listt {
                 System.out.printf("session removed: %s%n", session.getTitle());
                 return true;   // inactive → sil
             }
+
             return false;      // active → tut
+
         });
 
+        List<Integer> numList = new ArrayList<>(List.of(100, 99, 98, 97, 96));
+
+        List<Integer> evenList = numList.stream().filter(Listt::isEven).toList();
+        System.out.println(evenList);
+
     }
+
+    static boolean isEven(Integer el) {
+        return el % 2 == 0;
+    }
+
 }
