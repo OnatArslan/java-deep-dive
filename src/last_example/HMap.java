@@ -3,6 +3,8 @@ package last_example;
 import org.w3c.dom.ls.LSOutput;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class HMap {
     public static void main(String[] args) {
@@ -15,11 +17,12 @@ public class HMap {
 
         System.out.println(sortedList);
         System.out.println(reverseList);
+
     }
 
 
     public static Map<String, List<Order>> groupByStatus(List<Order> orders) {
-        Map<String,List<Order>> statusMap = new HashMap<>();
+        Map<String, List<Order>> statusMap = new HashMap<>();
 
         for (Order order : orders) {
             String status = order.getStatus();
@@ -30,8 +33,34 @@ public class HMap {
             statusMap.get(status).add(order);
         }
 
+        record User(
+                String username,
+                String email,
+                int age
+        ) {
+        }
 
-            return statusMap;
+
+        List<User> userList = List.of(new User("kerem", "kerem@gmail.com", 23),new User("onat", "kerem@gmail.com", 23),new User("adam", "kerem@gmail.com", 23));
+
+        List<User> onat = userList.stream().filter(user -> user.username.equals("onat")).toList();
+
+        Map<String, User> userMap = userList.stream().collect(Collectors.toMap(User::username, user -> user));
+        userMap.get("onat");
+        System.out.println(onat);
+        return statusMap;
+    }
+
+    public static Map<Integer, Integer> twoSum(List<Integer> list, int target) {
+        Map<Integer, Integer> seen = new HashMap<>();
+        for (int i = 0; i <= 0; i++) {
+            int remain = target - list.get(i);
+            if (seen.containsKey(remain)) {
+                return Map.of(list.get(i), list.get(remain));
+            }
+            seen.put(i, list.get(i));
+        }
+        return Map.of(0, 0);
     }
 
 }

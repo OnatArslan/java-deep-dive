@@ -1,5 +1,9 @@
 package last_example;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class Printer<T> {
     private T value;
 
@@ -22,6 +26,11 @@ public class Printer<T> {
 
         Printer<Integer> intPrinter = new Printer<>(19);
         intPrinter.print();
+
+        List<Integer> intList = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7));
+
+        List<Integer> evenNums = intList.stream().filter((num) -> num % 2 == 0).sorted(Comparator.comparing( a-> a, Comparator.reverseOrder())).toList();
+        System.out.println(evenNums);
 
     }
 
